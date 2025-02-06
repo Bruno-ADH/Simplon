@@ -29,34 +29,34 @@
 /**
  * Jeu de devinette
  */
-const randomNumber = Math.floor(Math.random() * 16)
-console.log('randomNumber :>> ', randomNumber);
-let number
+// const randomNumber = Math.floor(Math.random() * 16)
+// console.log('randomNumber :>> ', randomNumber);
+// let number
 
-do {
-    number = prompt("Devinez un nombre entier compris entre 0 et 15")
-    number = Number(number)
+// do {
+//     number = prompt("Devinez un nombre entier compris entre 0 et 15")
+//     number = Number(number)
 
-    if (!Number.isNaN(number)) {
-        if (number === randomNumber) {
-            console.log("Felicitations");
-        } else {
-            console.log("Mauvaise réponse")
-        }
-    } else {
-        console.log("Entrez un nombre valide");
-    }
-} while (number !== randomNumber) 
-
-//Authentification
-// const truePassword = "#Pass&Word022025"
-// let password
-
-// while(password !== truePassword){
-//     password = prompt("Entrez le mot de passe")
-//     if(password === truePassword){
-//         console.log("Excellent hacker !");
+//     if (!Number.isNaN(number)) {
+//         if (number === randomNumber) {
+//             console.log("Felicitations");
+//         } else {
+//             console.log("Mauvaise réponse")
+//         }
 //     } else {
-//         console.log("Réessayer")
+//         console.log("Entrez un nombre valide");
 //     }
-// }
+// } while (number !== randomNumber) 
+
+//zAuthentification
+const truePassword = "#Pass&Word022025"
+let password
+
+while(password !== truePassword){
+    password = prompt("Entrez le mot de passe")
+    if(password === truePassword){
+        console.log("Excellent hacker !");
+    } else {
+        console.log("Réessayer")
+    }
+}
