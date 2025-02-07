@@ -71,9 +71,10 @@ for (let i = (randomNumber-10); i <= (randomNumber+10); i++) {
 
 // console.log('randomNumber :>> ', randomNumber);
 // console.log(' near :>> ',  near);
-let number = prompt("Devinez un nombre entier compris entre 0 et 15 🐱‍👤")
+let number
 
 do {
+    number = prompt("Devinez un nombre entier compris entre 0 et 15 🐱‍👤")
     number = Number(number)
 
     if (!Number.isNaN(number)) {
@@ -87,7 +88,6 @@ do {
     } else {
         console.log("Entrez un nombre valide😒");
     }
-    number = prompt("Devinez un nombre entier compris entre 0 et 15 👾")
 } while (number !== randomNumber)
 
 //Authentification
