@@ -1,0 +1,7 @@
+#rond {
+    width: 50px;
+    height: 50px;
+    background-color: #0d6efd;
+    border-radius: 50%; 
+    position: absolute;
+}

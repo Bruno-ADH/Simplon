@@ -63,32 +63,32 @@
 /**
  * Jeu de devinette
  */
-const randomNumber = Math.floor(Math.random() * 101)
-let near = []
-for (let i = (randomNumber-10); i <= (randomNumber+10); i++) {
-    if(i !== randomNumber) near.push(i);
-}
+// const randomNumber = Math.floor(Math.random() * 101)
+// let near = []
+// for (let i = (randomNumber-10); i <= (randomNumber+10); i++) {
+//     if(i !== randomNumber) near.push(i);
+// }
 
-// console.log('randomNumber :>> ', randomNumber);
-// console.log(' near :>> ',  near);
-let number
+// // console.log('randomNumber :>> ', randomNumber);
+// // console.log(' near :>> ',  near);
+// let number
 
-do {
-    number = prompt("Devinez un nombre entier compris entre 0 et 15 🐱‍👤")
-    number = Number(number)
+// do {
+//     number = prompt("Devinez un nombre entier compris entre 0 et 15 🐱‍👤")
+//     number = Number(number)
 
-    if (!Number.isNaN(number)) {
-        if (number === randomNumber) {
-            console.log("Felicitations✨🥳");
-        } else if (near.includes(number)) {
-            console.log("Ça chauffe🥵");
-        } else {
-            console.log("Ça refroidit🥶")
-        }
-    } else {
-        console.log("Entrez un nombre valide😒");
-    }
-} while (number !== randomNumber)
+//     if (!Number.isNaN(number)) {
+//         if (number === randomNumber) {
+//             console.log("Felicitations✨🥳");
+//         } else if (near.includes(number)) {
+//             console.log("Ça chauffe🥵");
+//         } else {
+//             console.log("Ça refroidit🥶")
+//         }
+//     } else {
+//         console.log("Entrez un nombre valide😒");
+//     }
+// } while (number !== randomNumber)
 
 //Authentification
 // const truePassword = "#Pass&Word022025"
@@ -102,3 +102,32 @@ do {
 //         console.log("Réessayer")
 //     }
 // }
+
+
+
+// const rond = document.querySelector("#rond");
+
+rond.addEventListener("mouseover", (e) => {
+    rond.style.backgroundColor = "red"
+})
+
+rond.addEventListener("mouseout",(e)=>{
+    rond.style.backgroundColor = "blue"
+})
+
+const rond = document.querySelector("#rond");
+
+document.addEventListener("mousemove", function(event) {
+      const x = event.clientX;
+      const y = event.clientY;
+
+      rond.style.left = y + "px";
+      rond.style.top = x + "px";
+  });
+
+const btn = document.querySelector("button")
+
+btn.addEventListener("click", (e) => {
+    console.log('e :>> ', e);
+    console.log("Vous avez cliqué");
+})
