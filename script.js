@@ -33,7 +33,7 @@
 //             break;
 //         case "-":
 //             console.log(soustration(x, y));
-            
+
 //             break;
 //         case "*":
 //             multiplication(x, y)
@@ -107,27 +107,77 @@
 
 // const rond = document.querySelector("#rond");
 
-rond.addEventListener("mouseover", (e) => {
-    rond.style.backgroundColor = "red"
-})
+// rond.addEventListener("mouseover", (e) => {
+//     rond.style.backgroundColor = "red"
+// })
 
-rond.addEventListener("mouseout",(e)=>{
-    rond.style.backgroundColor = "blue"
-})
+// rond.addEventListener("mouseout",(e)=>{
+//     rond.style.backgroundColor = "blue"
+// })
 
-const rond = document.querySelector("#rond");
+// const rond = document.querySelector("#rond");
 
-document.addEventListener("mousemove", function(event) {
-      const x = event.clientX;
-      const y = event.clientY;
+// document.addEventListener("mousemove", function(event) {
+//       const x = event.clientX;
+//       const y = event.clientY;
 
-      rond.style.left = y + "px";
-      rond.style.top = x + "px";
-  });
+//       rond.style.left = y + "px";
+//       rond.style.top = x + "px";
+//   });
 
-const btn = document.querySelector("button")
+// const btn = document.querySelector("button")
 
-btn.addEventListener("click", (e) => {
-    console.log('e :>> ', e);
-    console.log("Vous avez cliqué");
-})
+// btn.addEventListener("click", (e) => {
+//     console.log('e :>> ', e);
+//     console.log("Vous avez cliqué");
+// })
+
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("#task-form");
+    const taskInput = document.querySelector("#task");
+    const tbody = document.querySelector("tbody");
+
+    let tasks = [];
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const taskText = taskInput.value.trim();
+        if (!taskText) return;
+
+        tasks.push(taskText);
+        renderTasks();
+        taskInput.value = "";
+    });
+
+    function renderTasks() {
+        tbody.innerHTML = "";
+        tasks.forEach((task, index) => {
+            const tr = document.createElement("tr");
+
+            tr.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${task}</td>
+                <td class="action-buttons">
+                    <a href="#task-form"><button class="edit-btn" onclick="editTask(${index})"><i class="fa-solid fa-pen-to-square"></i></button></a>
+                    <button class="delete-btn" onclick="deleteTask(${index})"><i class="fa-solid fa-trash-can"></i></button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    window.editTask = (index) => {
+        const newTask = prompt("Modifier la tâche :", tasks[index]);
+        if (newTask) {
+            tasks[index] = newTask.trim();
+            renderTasks();
+        }
+    };
+
+    window.deleteTask = (index) => {
+        tasks.splice(index, 1);
+        renderTasks();
+    };
+
+    renderTasks();
+});
