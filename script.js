@@ -182,9 +182,64 @@
 //     renderTasks();
 // });
 
-let allLi = document.querySelectorAll("li");
+// let allLi = document.querySelectorAll("li");
 
-allLi.forEach((li, index) =>{
-    li.textContent = `Je suis à l'index ${index}`
-    li.style.color=`hsl(${Math.random() * 360}, 100%, 70%)`
+// allLi.forEach((li, index) =>{
+//     li.textContent = `Je suis à l'index ${index}`
+//     li.style.color=`hsl(${Math.random() * 360}, 100%, 70%)`
+// })
+
+const span = document.querySelector("span")
+const input = document.querySelector("input")
+
+function capitalizeWords(texte = "") {
+    return texte.toUpperCase()
+}
+
+
+function normalizeWords(texte = "") {
+    return texte.toLowerCase()
+}
+
+function extractDomain(texte = "") {
+    if(!texte.includes("@")) {
+        alert("Entrez un mail valide")
+        return "Mail invalide"
+    } {
+        const domain = texte.split("@")
+        return domain[1]
+    }
+}
+
+function formatPrice(x) {
+    x = Number(x)
+    console.log('typeof(x) :>> ', typeof x);
+    if(Number.isNaN(x)){
+        alert("Entrez un nombre")
+        return "Nombre invalide"
+    } {
+        return Number.parseFloat(x).toFixed(2);
+    }
+  }
+
+
+document.querySelectorAll("button").forEach((btn, index) => {
+    btn.addEventListener("click", (e) => {
+        switch (e.target.id) {
+            case "capitalize":
+                span.textContent = capitalizeWords(input.value)
+                break;
+            case "lowercase":
+                span.textContent = normalizeWords(input.value)
+                break;
+            case "extractDomain":
+                span.textContent = extractDomain(input.value)
+                break;
+            case "formatPrice":
+                span.textContent = formatPrice(input.value)
+                break
+            default:
+                break;
+        }
+    })
 })

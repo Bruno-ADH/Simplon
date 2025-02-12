@@ -130,3 +130,21 @@ body{
 ul li {
     padding: 5px;
 }
+
+#lowercase {
+    margin-inline: 5px;
+}
+
+#formatPrice {
+    margin-left: 5px;
+}
+
+.convert {
+    margin: 15px;
+    background-color: #333;
+    padding: .6rem;
+    border-radius: 3px;
+    width: fit-content;
+    text-align: center;
+    color: #ddd;
+}
