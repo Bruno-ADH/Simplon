@@ -5,19 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"> -->
 </head>
 <body>
+    <form id="task-form">
+        <input type="text" id="task" placeholder="Entrez une tâche..." required>
+        <button type="submit">Enregistrer</button>
+        <button type="removeLastItem">Supprimer</button>
+    </form>
 
-    <input type="text" name="texte" id="texte" placeholder="Entrer un texte ou un mail">
-    <button id="capitalize">Capitalise</button>
-    <button id="lowercase">Miniscule</button>
-    <button id="extractDomain">Nom de domaine</button>
-    <button id="formatPrice">Format Price</button>
-    <br/>
-    <div class="convert">
-        <span>Convertir votre texte ou extraire le domaine</span>
-    </div>
+    <table>
+        <thead>
+            <tr>
+                <td>N°</td>
+                <td>Tâche</td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script> -->
     <script src="script.js"></script>
 </body>
 </html>
