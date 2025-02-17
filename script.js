@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const daysGrid = document.querySelector(".days-grid");
     const prevMonthBtn = document.querySelector("#prev-month");
     const nextMonthBtn = document.querySelector("#next-month");
-    const modal = document.querySelector("#event-modal");
     const selectedDateText = document.querySelector("#selected-date");
     const eventList = document.querySelector("#event-list");
     const eventText = document.querySelector("#event-text");
@@ -98,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
         events[selectedDate].splice(index, 1);
         if (events[selectedDate].length === 0) {
             delete events[selectedDate];
+            delete eventColors[selectedDate]
         }
         localStorage.setItem("events", JSON.stringify(events));
         openModal(selectedDate);
