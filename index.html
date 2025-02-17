@@ -1,30 +1,63 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
+    <title>Calendrier des Événements</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"> -->
 </head>
+
 <body>
-    <form id="task-form">
-        <input type="text" id="task" placeholder="Entrez une tâche..." required>
-        <button type="submit">Enregistrer</button>
-        <button type="removeLastItem">Supprimer</button>
-    </form>
+    <div class="flip-container">
+        <div class="flipper">
+            <div class="front">
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <span id="prev-month"><i class="fas fa-chevron-left"></i></span>
+                        <h1 id="month-year"></h1>
+                        <span id="next-month"><i class="fas fa-chevron-right"></i></span>
+                    </div>
+                    <div class="calendar">
+                        <div class="days-of-week">
+                            <div>Dim</div>
+                            <div>Lun</div>
+                            <div>Mar</div>
+                            <div>Mer</div>
+                            <div>Jeu</div>
+                            <div>Ven</div>
+                            <div>Sam</div>
+                        </div>
+                        <div class="days-grid"></div>
+                    </div>
+                </div>
+            </div>
 
-    <table>
-        <thead>
-            <tr>
-                <td>N°</td>
-                <td>Tâche</td>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+            <div class="back">
+                <div id="event-modal" class="modal-content">
+                    <button id="close-modal" class="close-icon">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <h2>Événements du <span id="selected-date"></span></h2>
+                    <ul id="event-list"></ul>
+                    <p id="empty-message" class="empty-message">Aucun événement. Ajoutez-en un !</p>
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script> -->
+                    <input type="text" id="event-text" placeholder="Ajouter un événement">
+                    <button id="add-event" class="add-btn"><i class="fas fa-plus"></i>Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>

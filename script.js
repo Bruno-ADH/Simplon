@@ -1,93 +1,118 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const flipContainer = document.querySelector(".flip-container");
+    const monthYear = document.querySelector("#month-year");
+    const daysGrid = document.querySelector(".days-grid");
+    const prevMonthBtn = document.querySelector("#prev-month");
+    const nextMonthBtn = document.querySelector("#next-month");
+    const modal = document.querySelector("#event-modal");
+    const selectedDateText = document.querySelector("#selected-date");
+    const eventList = document.querySelector("#event-list");
+    const eventText = document.querySelector("#event-text");
+    const addEventBtn = document.querySelector("#add-event");
+    const closeModalBtn = document.querySelector("#close-modal");
 
-// document.addEventListener("DOMContentLoaded", () => {
-//     const form = document.querySelector("#task-form");
-//     const taskInput = document.querySelector("#task");
-//     const tbody = document.querySelector("tbody");
+    const events = JSON.parse(localStorage.getItem("events")) || {}
+    let eventColors = {};
+    let selectedDate
+    let currentDate = new Date();
 
-//     let tasks = [];
+    function getRandomColor() {
+        const hue = Math.floor(Math.random() * 360);
+        return `hsl(${hue}, 70%, 60%)`;
+    }
+    
 
-//     form.addEventListener("submit", (e) => {
-//         e.preventDefault();
-//         const taskText = taskInput.value.trim();
-//         if (!taskText) return;
+    function generateCalendar() {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
 
-//         tasks.push(taskText);
-//         renderTasks();
-//         taskInput.value = "";
-//     });
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-//     function renderTasks() {
-//         tbody.innerHTML = "";
-//         tasks.forEach((task, index) => {
-//             const tr = document.createElement("tr");
+        monthYear.textContent = currentDate.toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
 
-//             tr.innerHTML = `
-//                 <td>${index + 1}</td>
-//                 <td>${task}</td>
-//                 <td class="action-buttons">
-//                     <a href="#task-form"><button class="edit-btn" onclick="editTask(${index})"><i class="fa-solid fa-pen-to-square"></i></button></a>
-//                     <button class="delete-btn" onclick="deleteTask(${index})"><i class="fa-solid fa-trash-can"></i></button>
-//                 </td>
-//             `;
-//             tbody.appendChild(tr);
-//         });
-//     }
+        daysGrid.innerHTML = "";
 
-//     window.editTask = (index) => {
-//         const newTask = prompt("Modifier la tâche :", tasks[index]);
-//         if (newTask) {
-//             tasks[index] = newTask.trim();
-//             renderTasks();
-//         }
-//     };
+        for (let i = 0; i < firstDay; i++) {
+            let emptyCell = document.createElement("div");
+            daysGrid.appendChild(emptyCell)
+        }
 
-//     window.deleteTask = (index) => {
-//         tasks.splice(index, 1);
-//         renderTasks();
-//     };
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayDiv = document.createElement("div");
+            dayDiv.classList.add("day")
+            dayDiv.textContent = day
+            dayDiv.dataset.date = `${year}-${month + 1}-${day}`
 
-//     renderTasks();
-// });
+            if (events[dayDiv.dataset.date] && events[dayDiv.dataset.date].length > 0) {
+                if (!eventColors[dayDiv.dataset.date]) {
+                    eventColors[dayDiv.dataset.date] = getRandomColor();
+                }
+                dayDiv.style.backgroundColor = eventColors[dayDiv.dataset.date];
+                dayDiv.style.color = "white";
+            }
 
-// document.addEventListener("DOMContentLoaded", () => {
-//     const form = document.querySelector("#task-form");
-//     const taskInput = document.querySelector("#task");
-//     const tbody = document.querySelector("tbody");
+            dayDiv.addEventListener("click", () => openModal(dayDiv.dataset.date))
+            daysGrid.appendChild(dayDiv)
+        }
+    }
 
-//     let tasks = [];
+    function openModal(date) {
+        selectedDate = date;
+        selectedDateText.textContent = selectedDate;
+        eventList.innerHTML = "";
+        if (events[selectedDate]) {
+            events[selectedDate].forEach((event, index) => {
+                const li = document.createElement("li");
+                li.textContent = event;
 
-//     form.addEventListener("submit", (e) => {
-//         e.preventDefault()
-//         const taskText = taskInput.value.trim();
-//         if (!taskText) return;
-//         tasks.push(taskText);
-//         renderTasks();
-//         taskInput.value = "";
-//     })
+                const deleteBtn = document.createElement("button");
+                deleteBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`;
+                deleteBtn.classList.add("delete-event");
+                deleteBtn.addEventListener("click", () => deleteEvent(index));
 
-//     function renderTasks() {
-//         tbody.innerHTML = "";
-//         tasks.forEach((task, index) => {
-//             const tr = document.createElement("tr");
+                li.appendChild(deleteBtn);
+                eventList.appendChild(li);
+            });
+        }
+        // modal.classList.remove("none");
+        flipContainer.classList.add("flipped");
+    }
 
-//             tr.innerHTML = `
-//                 <td>${index + 1}</td>
-//                 <td>${task}</td>
-//             `;
-//             tbody.appendChild(tr);
-//         });
-//     }
-// })
+    function addEvent() {
+        const text = eventText.value.trim();
+        if (text) {
+            if (!events[selectedDate]) {
+                events[selectedDate] = [];
+            }
+            events[selectedDate].push(text);
+            localStorage.setItem("events", JSON.stringify(events));
+            eventText.value = "";
+            openModal(selectedDate);
+        }
+        // modal.classList.add("none");
+        generateCalendar()
+    }
 
-function displayObjectEntries(data={}) {
-    return Object.entries(data);
-}
+    function deleteEvent(index) {
+        events[selectedDate].splice(index, 1);
+        if (events[selectedDate].length === 0) {
+            delete events[selectedDate];
+        }
+        localStorage.setItem("events", JSON.stringify(events));
+        openModal(selectedDate);
+    }
 
-const datas = {
-    "key1": "Value1", 
-    "Key2": "Value2", 
-    "Key3": "Value3", 
-    "Key4": "Value4"
-}
-console.log(displayObjectEntries(datas));
+    function changeMonth(offset) {
+        console.log("eeeeee");
+        
+        currentDate.setMonth(currentDate.getMonth() + offset);
+        generateCalendar();
+    }
 
+    prevMonthBtn.addEventListener("click", () => changeMonth(-1));
+    nextMonthBtn.addEventListener("click", () => changeMonth(1));
+    addEventBtn.addEventListener("click", addEvent)
+    closeModalBtn.addEventListener("click", () => flipContainer.classList.remove("flipped"))
+    generateCalendar()
+});
