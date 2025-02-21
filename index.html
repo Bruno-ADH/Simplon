@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendrier des Événements</title>
+    <title>Drag and Drop</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,46 +15,28 @@
 </head>
 
 <body>
-    <div class="flip-container">
-        <div class="flipper">
-            <div class="front">
-                <div class="calendar-container">
-                    <div class="calendar-header">
-                        <span id="prev-month"><i class="fas fa-chevron-left"></i></span>
-                        <h1 id="month-year"></h1>
-                        <span id="next-month"><i class="fas fa-chevron-right"></i></span>
-                    </div>
-                    <div class="calendar">
-                        <div class="days-of-week">
-                            <div>Dim</div>
-                            <div>Lun</div>
-                            <div>Mar</div>
-                            <div>Mer</div>
-                            <div>Jeu</div>
-                            <div>Ven</div>
-                            <div>Sam</div>
-                        </div>
-                        <div class="days-grid"></div>
-                    </div>
-                </div>
+
+    <div class="background-svg"></div>
+    <div class="container">
+        <form id="taskForm">
+            <input type="text" id="taskInput" placeholder="Ajouter une tâche..." required>
+            <button type="submit"><i class="fa-solid fa-plus"></i></button>
+        </form>
+
+        <div class="todo-wrapper">
+            <div id="todo" class="column">
+                <h3><i class="fa-solid fa-thumbtack"></i> À faire</h3>
             </div>
-
-            <div class="back">
-                <div id="event-modal" class="modal-content">
-                    <button id="close-modal" class="close-icon">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <h2>Événements du <span id="selected-date"></span></h2>
-                    <ul id="event-list"></ul>
-                    <p id="empty-message" class="empty-message">Aucun événement. Ajoutez-en un !</p>
-
-                    <input type="text" id="event-text" placeholder="Ajouter un événement">
-                    <button id="add-event" class="add-btn"><i class="fas fa-plus"></i>Ajouter</button>
-                </div>
+            <div id="inProgress" class="column">
+                <h3><i class="fa-solid fa-spinner fa-pulse"></i> En cours</h3>
+            </div>
+            <div id="done" class="column">
+                <h3><i class="fa-solid fa-check-circle"></i> Fait 
+                    <span id="trash" class="trash-icon"><i class="fa-solid fa-trash"></i></span>
+                </h3>
             </div>
         </div>
     </div>
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script>
     <script src="script.js"></script>
