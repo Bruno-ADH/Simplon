@@ -1,32 +1,47 @@
-function fetchData() {
-    setTimeout(() => {
-        console.log("Exo1 Données récupérées");
-    }, 2000);
+class Livre {
+    #titre
+    #auteur
+    #anneePublication
+    #disponible
+
+    /**
+     * @param {String} titre -
+     * @param {String} auteur
+     * @param {Number} anneepublication
+     * @param {Boolean} disponible 
+     */
+    constructor(titre, auteur, anneePublication, disponible = true){
+        this.#titre = titre
+        this.#auteur = auteur
+        this.#anneePublication = anneePublication
+        this.#disponible = disponible
+    }
+
+    get titre(){
+        return this.#titre;
+    }
+
+    get disponibility(){
+        return this.#disponible
+    }
+
+    emprunter(){
+        this.#disponible === true ? this.#disponible = false : null;
+    }
+
+    rendre(){
+        this.#disponible = true;
+    }
+
 }
-fetchData()
 
-function getData() {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve("Exo2 Résultat obtenu")
-        }, 3000)
-    })
+class Utilisateur {
+    /**
+     * @param {String} nom
+     * @param {Array} livreEmpruntes
+    */
+    constructor(nom, livreEmpruntes =[]){
+        this.nom = nom;
+        this.livreEmpruntes = livreEmpruntes;
+    }
 }
-
-async function showData() {
-    const data = await getData()
-    console.log('data :>> ', data);
-}
-
-showData()
-
-function checkWeather() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            const wth = Math.random() < 0.5 ? "Ensoleillé" : "Pluvieux"
-            resolve(wth)
-        }, 2000)
-    })
-}
-
-checkWeather().then(p => console.log('Exo3: Le temps est ', p))
