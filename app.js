@@ -2,15 +2,33 @@
 const path = require('node:path');
 const fs = require("node:fs");
 
-const directoryPath = "C:/Users/Bruno/Documents/Simplon/learnJs"
+const directoryPath = path.join(__dirname, 'data')
+const filePath = path.join(directoryPath, 'info.txt')
 
-fs.stat(directoryPath, (err, stats) => {
-    if(err) console.erro('err :>> ', err);
-    if(stats.isDirectory()){
-        fs.readdir(directoryPath, (err, stats) => {
-            if(err) console.erro('err :>> ', err);
-            console.log('stats :>> ', stats);
-            stats.forEach((file) => console.log('file.extname() >> ', path.extname(file)))
-        })
-    }
+console.log('directoryPath :>> ', directoryPath);
+
+fs.mkdir(directoryPath, { recursive: true}, (err) => {
+    if(err) {
+        console.log('err :>> ', err)
+        return
+    };
+
+    fs.writeFile(filePath, 'Lorem ipsum dolor', (err) => {
+        if(err) {
+            console.log('err :>> ', err)
+            return
+        };
+
+        if(fs.existsSync(filePath)) {
+            fs.stat(filePath, (err, stats) => {
+                if(err) {
+                    console.log('err :>> ', err)
+                    return
+                };
+                
+                if(stats.isFile()) console.log("Le fichier",path.basename(filePath) ,"a bien été créer");
+                
+            })
+        }
+    })
 })
