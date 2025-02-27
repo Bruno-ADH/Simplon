@@ -1,11 +1,16 @@
 
 const path = require('node:path');
-const fs = require("node:fs")
-// const prenom = process.argv[2] || "inconnu";
-// console.log(`Bonjour, ${prenom} ! Bienvenue dans le monde de Node.js. 🚀`);
-// console.log(process.argv);
-const pathToTest = path.join(__dirname,"upload/text/test.txt")
-console.log('pathToTest :>> ', pathToTest);
+const fs = require("node:fs");
 
-const data = fs.readFileSync(pathToTest, "utf8")
-console.log('data :>> ', data,"\n\n");
+const directoryPath = "C:/Users/Bruno/Documents/Simplon/learnJs"
+
+fs.stat(directoryPath, (err, stats) => {
+    if(err) console.erro('err :>> ', err);
+    if(stats.isDirectory()){
+        fs.readdir(directoryPath, (err, stats) => {
+            if(err) console.erro('err :>> ', err);
+            console.log('stats :>> ', stats);
+            stats.forEach((file) => console.log('file.extname() >> ', path.extname(file)))
+        })
+    }
+})
